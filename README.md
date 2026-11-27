@@ -63,8 +63,16 @@ Inside Premiere the plugin shows up as **MediaEngine importer** (its internal na
 
 ## Install
 
-There's no release yet. Until there is, build it from source (below). The first release will
-be a zip with `Install.command` and `Uninstall.command`.
+1. Download the latest zip from [Releases](../../releases) and unzip it.
+2. Quit Premiere Pro.
+3. Right-click `Install.command` and choose **Open** (a plain double-click is blocked the first
+   time, because the build isn't notarized by Apple). If macOS still refuses: System Settings >
+   Privacy & Security > scroll down > **Open Anyway**.
+4. Enter your Mac login password when Terminal asks. It copies the plugin into
+   `/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore/MediaEngine`.
+5. Start Premiere and import an AV1 or VP9 file.
+
+To remove it, quit Premiere and open `Uninstall.command` the same way.
 
 ## Build from source
 
@@ -72,8 +80,10 @@ You need:
 
 - Xcode command line tools: `xcode-select --install`
 - The **Adobe Premiere Pro C++ SDK**. Adobe's license doesn't allow redistributing it, so it isn't
-  in this repo. Download it from the [Adobe Developer Console](https://developer.adobe.com/console/servicesandapis)
-  (Premiere Pro → C++ SDK; free Adobe account needed) and unzip it into `sdk/`, so the headers
+  in this repo. Download it from the [Adobe Developer Console](https://developer.adobe.com/console/servicesandapis/pr)
+  (sign in with a free personal Adobe account; if it won't load, see Adobe's
+  [access guide](https://developer.adobe.com/premiere-pro/access-the-developer-console/))
+  and unzip it into `sdk/`, so the headers
   end up at `sdk/Premiere Pro 26.0 C++ SDK/Examples/Headers`. For a different SDK version or
   location, pass the headers folder: `make SDK="/path/to/Examples/Headers"`. `sdk/` is in
   `.gitignore`.
@@ -135,6 +145,8 @@ build/meprobe bench clip.webm
 ```bash
 open ~/Library/Logs/MediaEngine/stats.html
 ```
+
+![Stats page: frame request timings while scrubbing and playing a 4K clip in Premiere](docs/stats.png)
 
 ## Measured on M4 (macOS 27.2, Premiere Pro 26.5.2, FFmpeg 9.0.2)
 
