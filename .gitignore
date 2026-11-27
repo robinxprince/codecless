@@ -1,0 +1,84 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.Spotlight-V100
+.Trashes
+.fseventsd
+Icon?
+
+# Adobe Premiere Pro C++ SDK: Adobe license, not redistributable.
+# Download it yourself and put it here (see README).
+sdk/
+
+# Build output (make, tools/build-deps.sh, make package)
+build/
+dist/
+*.bundle
+*.plugin
+*.aex
+*.prm
+*.rsrc
+*.o
+*.a
+*.dylib
+*.dSYM/
+*.zip
+
+# Xcode
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# Visual Studio / Windows builds
+.vs/
+*.obj
+*.lib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.user
+*.suo
+*.VC.db
+x64/
+Debug/
+Release/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Test media and logs (tests/verify.sh writes its clips to a work dir you choose)
+*.mp4
+*.m4v
+*.mov
+*.mkv
+*.webm
+*.ivf
+*.obu
+*.y4m
+*.log
+
+# Secrets and signing material
+.env
+.env.*
+*.pem
+*.p8
+*.p12
+*.key
+*.cer
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile
+
+# Node (if a panel is ever added)
+node_modules/

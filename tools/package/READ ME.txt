@@ -1,0 +1,45 @@
+MediaEngine importer: AV1 and VP9 in Premiere Pro (test build)
+================================================================
+
+Lets Premiere Pro import AV1 and VP9 video (YouTube downloads in .mp4, .mkv or .webm),
+frame-accurate, decoded on the Mac's media engine where the chip supports it.
+
+Needs
+- A Mac with Apple silicon (M1 or later), macOS 13 Ventura or later
+- Premiere Pro 2025 or later (tested on 26.5 and 27.0)
+- On M3 and later, AV1 and VP9 both decode in hardware. On M1 and M2, VP9 is hardware
+  and AV1 is decoded in software (dav1d): it plays, but 4K AV1 scrubbing is slower.
+
+Install
+1. Quit Premiere Pro.
+2. Unzip, then right-click "Install.command" and choose Open (a plain double-click is blocked
+   the first time, because the script isn't from the App Store). If macOS still refuses:
+   System Settings > Privacy & Security > scroll down > "Open Anyway".
+3. Enter your Mac login password when Terminal asks (it copies the plugin into
+   /Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore/MediaEngine).
+4. Start Premiere and import an AV1 or VP9 file.
+
+Or, in Terminal, from the unzipped folder:
+    zsh Install.command
+
+Check it works
+- Select the clip, Properties panel: it says "MediaEngine importer" and which decoder is used.
+- Log: ~/Library/Logs/MediaEngine.log
+- Live performance page: open ~/Library/Logs/MediaEngine/stats.html in a browser while
+  Premiere is running (how long each frame took, scrub vs playback, cache use).
+
+Good to know
+- Opening a clip reads the whole file once to index it; very large files take a moment.
+- YouTube files have long gaps between keyframes, so jumping to a random spot can take
+  0.3 to 1.4 s at 4K. Playback itself is fast.
+- Right after import, Premiere analyses new clips in the background (Settings > Media Analysis
+  & Transcription) for up to ~20 minutes on long 4K files. It runs once per file.
+- H.264 and other formats are left to Premiere's own importers.
+- Clips imported before installing keep Premiere's old interpretation; re-import them.
+
+Uninstall
+Quit Premiere, then right-click "Uninstall.command" > Open (or: zsh Uninstall.command).
+
+This is a test build, signed only locally (not notarized by Apple). It contains FFmpeg and
+dav1d, both LGPL / BSD licensed open-source libraries, linked statically; see
+THIRD_PARTY_NOTICES.txt. Codecless is MIT licensed (LICENSE).
