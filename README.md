@@ -146,7 +146,7 @@ build/meprobe bench clip.webm
 open ~/Library/Logs/MediaEngine/stats.html
 ```
 
-![Stats page: frame request timings while scrubbing and playing a 4K clip in Premiere](docs/stats.png)
+![Stats page: time to serve each frame request while scrubbing and playing a clip in Premiere](docs/stats.png)
 
 ## Measured on M4 (macOS 27.2, Premiere Pro 26.5.2, FFmpeg 9.0.2)
 
