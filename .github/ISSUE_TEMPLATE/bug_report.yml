@@ -1,0 +1,78 @@
+name: Bug report
+description: A clip won't import, looks wrong, plays badly, or Premiere misbehaves with the plugin installed.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Codecless is alpha software, so details matter.
+        The log is at `~/Library/Logs/MediaEngine.log`.
+  - type: input
+    id: premiere
+    attributes:
+      label: Premiere Pro version
+      description: Premiere Pro > About Premiere Pro
+      placeholder: e.g. 26.5.2
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: macOS version and Mac model
+      placeholder: e.g. macOS 27.2, MacBook Pro M4
+    validations:
+      required: true
+  - type: input
+    id: plugin
+    attributes:
+      label: Codecless version or commit
+      description: Release zip name, or `git rev-parse --short HEAD` if you built it yourself
+    validations:
+      required: true
+  - type: dropdown
+    id: codec
+    attributes:
+      label: Video codec
+      options: [AV1, VP9, Other / not sure]
+    validations:
+      required: true
+  - type: dropdown
+    id: container
+    attributes:
+      label: Container
+      options: [.mp4, .mkv, .webm, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample file details
+      description: |
+        Resolution, frame rate, bit depth, HDR or SDR, length, audio codec, and where it came from
+        (e.g. YouTube download via yt-dlp, OBS recording). Output of `ffprobe -hide_banner <file>`
+        or MediaInfo is ideal. A link to a short sample clip helps most.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Import clip.webm
+        2. Put it on a 4K 60p sequence
+        3. Scrub to ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What happened, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Relevant lines from ~/Library/Logs/MediaEngine.log
+      render: text
